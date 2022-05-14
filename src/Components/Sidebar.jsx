@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { updateToken } from "../Redux/Auth/action";
+import { logoutUser } from "../Redux/Auth/action";
 let tokenLocal = localStorage.getItem("token");
 const Sidebar = () => {
   const { token } = useSelector((state) => state.isAuth);
@@ -14,9 +15,8 @@ const Sidebar = () => {
       navigate("/login");
     } else {
       dispatch(updateToken(tokenLocal));
-      // navigate("/");
     }
-  }, [tokenLocal]);
+  }, []);
 
   const login = () => {
     navigate("/login");
@@ -33,7 +33,14 @@ const Sidebar = () => {
       <br />
       {token ? (
         <div className="logOut">
-          <button>Logout</button>
+          <button
+            onClick={() => {
+              dispatch(logoutUser());
+              navigate("/login");
+            }}
+          >
+            Logout
+          </button>
         </div>
       ) : (
         <div className="login">

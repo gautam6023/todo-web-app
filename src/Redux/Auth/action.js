@@ -4,6 +4,7 @@ export const AUTH_REQUEST = "AUTH_REQUEST";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const UPDATE_TOKEN = "UPDATE_TOKEN";
+export const LOGOUT_USER = "LOGOUT_USER";
 
 let token = localStorage.getItem("token") || "";
 
@@ -20,14 +21,15 @@ const authSuccess = (token) => ({
   payload: token,
 });
 
-export const getToken = (payload) => async (dispatch) => {
+export const getToken = (payload, navigate) => async (dispatch) => {
   dispatch(authRequest());
   try {
     let res = await axios.post("https://reqres.in/api/login", payload);
     let data = await res.data;
     console.log(data);
     dispatch(authSuccess(data.token));
-    console.log(data);
+
+    navigate("/");
 
     localStorage.setItem("token", data.token);
   } catch (err) {
@@ -42,4 +44,13 @@ export const updateToken = (token) => async (dispatch) => {
     type: UPDATE_TOKEN,
     payload: token,
   });
+};
+
+//logout
+
+export const logoutUser = () => async (dispatch) => {
+  dispatch({
+    type: LOGOUT_USER,
+  });
+  localStorage.setItem("token", "");
 };

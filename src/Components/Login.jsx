@@ -5,9 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { CircularProgress } from "@mui/material";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router";
-
+let tokenLocal = localStorage.getItem("token");
 const Login = () => {
-  //let tokenLocal = localStorage.getItem("token");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const location = useLocation();
@@ -18,6 +17,9 @@ const Login = () => {
   //Handling change
   console.log(location);
 
+  //   if (tokenLocal) {
+  //     navigate(from, { replace: true });
+  //   }
   //   useEffect(() => {
   //     if (tokenLocal) {
   //       navigate(from, { replace: true });
@@ -28,10 +30,13 @@ const Login = () => {
     e.preventDefault();
     console.log(email, password);
     dispatch(
-      getToken({
-        email: "eve.holt@reqres.in",
-        password: "cityslicka",
-      })
+      getToken(
+        {
+          email: "eve.holt@reqres.in",
+          password: "cityslicka",
+        },
+        navigate
+      )
     );
   };
 

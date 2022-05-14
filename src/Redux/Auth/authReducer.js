@@ -1,4 +1,10 @@
-import { AUTH_ERROR, AUTH_REQUEST, AUTH_SUCCESS, UPDATE_TOKEN } from "./action";
+import {
+  AUTH_ERROR,
+  AUTH_REQUEST,
+  AUTH_SUCCESS,
+  UPDATE_TOKEN,
+  LOGOUT_USER,
+} from "./action";
 
 const inintState = {
   token: "",
@@ -38,6 +44,11 @@ export const authReducer = (state = inintState, action) => {
         token: action.payload,
       };
 
+    case LOGOUT_USER:
+      return {
+        ...state,
+        token: "",
+      };
     default:
       return state;
   }
