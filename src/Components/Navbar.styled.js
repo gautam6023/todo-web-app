@@ -4,7 +4,8 @@ export const NavbarContainer = styled.nav`
   width: 15%;
   height: 100%;
   background-color: #94a3b8;
-
+  box-sizing: border-box;
+  padding: 10px;
   position: fixed;
   left: 0;
   top: 0;

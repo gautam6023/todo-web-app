@@ -7,9 +7,11 @@ import {
 //import { legacy_createStore as createStore } from "react-redux";
 import thunk from "redux-thunk";
 import { authReducer } from "./Auth/authReducer";
+import { todoReducer } from "./Todos/todosReducer";
 
 const reducer = combineReducers({
   isAuth: authReducer,
+  todos: todoReducer,
 });
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

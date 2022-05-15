@@ -5,6 +5,7 @@ import React from "react";
 import Sidebar from "../Components/Sidebar";
 import Home from "../Components/Home";
 import ReqAuth from "./ReqAuth";
+import CreateTask from "../Components/CreateTask";
 
 const MainRoutes = () => {
   return (
@@ -19,6 +20,7 @@ const MainRoutes = () => {
             </ReqAuth>
           }
         />
+        <Route path="/createtask" element={<CreateTask />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </>

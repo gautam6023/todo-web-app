@@ -5,6 +5,10 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { updateToken } from "../Redux/Auth/action";
 import { logoutUser } from "../Redux/Auth/action";
+import UserDetails from "./UserDetails";
+import TodosFilter from "./TodosFilter";
+import { Link } from "react-router-dom";
+
 let tokenLocal = localStorage.getItem("token");
 const Sidebar = () => {
   const { token } = useSelector((state) => state.isAuth);
@@ -24,24 +28,34 @@ const Sidebar = () => {
   return (
     <NavbarContainer>
       <div className="logoCon">
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/6/67/Microsoft_To-Do_icon.png"
-          alt=""
-        />
-        <p>My Todo List</p>
+        <Link to="/" className="logoCon" style={{ textDecoration: "none" }}>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/6/67/Microsoft_To-Do_icon.png"
+            alt=""
+          />
+
+          <p>My Todo List</p>
+        </Link>
       </div>
       <br />
       {token ? (
-        <div className="logOut">
-          <button
-            onClick={() => {
-              dispatch(logoutUser());
-              navigate("/login");
-            }}
-          >
-            Logout
-          </button>
-        </div>
+        <>
+          {/* Profile user */}
+          <UserDetails />
+
+          <TodosFilter />
+          <Link to={"createtask"}>Add Task</Link>
+          <div className="logOut">
+            <button
+              onClick={() => {
+                dispatch(logoutUser());
+                navigate("/login");
+              }}
+            >
+              Logout
+            </button>
+          </div>
+        </>
       ) : (
         <div className="login">
           <button onClick={login}>Login</button>
