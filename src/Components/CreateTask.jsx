@@ -42,7 +42,7 @@ const CreateTask = () => {
       setTodoData({
         ...todoData,
         subTodos,
-        [classN]: e.target.checked,
+        [name]: classN,
       });
     } else {
       setTodoData({
@@ -69,6 +69,7 @@ const CreateTask = () => {
           placeholder="Title"
           onChange={(e) => handleChange(e)}
           className="titleInp"
+          required
         />
         <textarea
           placeholder="Description"
@@ -82,7 +83,7 @@ const CreateTask = () => {
             <input
               type="radio"
               className="todo"
-              name="status"
+              name="task_status"
               onChange={(e) => handleChange(e)}
             />
             <p>Todo</p>
@@ -91,7 +92,7 @@ const CreateTask = () => {
             <input
               type="radio"
               className="inProgress"
-              name="status"
+              name="task_status"
               onChange={(e) => handleChange(e)}
             />
             <p>In Progress</p>
@@ -100,7 +101,7 @@ const CreateTask = () => {
             <input
               type="radio"
               className="done"
-              name="status"
+              name="task_status"
               onChange={(e) => handleChange(e)}
             />
             <p>Done</p>
@@ -135,7 +136,12 @@ const CreateTask = () => {
         </div>
       </div>
       <div className="submitCon">
-        <input type="date" name="date" onChange={(e) => handleChange(e)} />
+        <input
+          type="date"
+          name="date"
+          onChange={(e) => handleChange(e)}
+          required
+        />
         <button type="submit">Create a new task</button>
       </div>
 
@@ -150,7 +156,9 @@ const CreateTask = () => {
               setSubTask({ ...subTask, subTodo: e.target.value })
             }
           />
-          <button onClick={() => handleSubtask()}>Add</button>
+          <button type="button" onClick={() => handleSubtask()}>
+            Add
+          </button>
         </div>
         <div className="subTodoCon">
           {subTodos.map((el) => {
